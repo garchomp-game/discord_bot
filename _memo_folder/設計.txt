@@ -1,8 +1,7 @@
 Bot
     text token
-
-Server
     integer guild_id
+
 
 Message
     integer channel_id nullable
@@ -22,12 +21,13 @@ controller
         update
         destroy
     auth/(make:auth)
-    server
+    
+    bot
         index
             いわゆるこれがトップ画面になる。
     message
         DiscordPHPはここに設置する
-        
+
         store
         update
         destroy

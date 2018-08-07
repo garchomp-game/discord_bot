@@ -16,6 +16,7 @@ class CreateBotsTable extends Migration
         Schema::create('bots', function (Blueprint $table) {
             $table->increments('id');
             $table->text('token');
+            $table->bigInteger('guild_id');
             $table->timestamps();
         });
     }

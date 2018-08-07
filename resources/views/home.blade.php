@@ -16,14 +16,14 @@
                     <h2>ボット一覧</h2>
                     <ul class="list-group">
                         @forelse ($guild_list as $value)
-                            <a class="list-group-item" href="{{route('server.show', $value->id)}}">
+                            <a class="list-group-item" href="{{route('bot.show', $value->id)}}">
                                 <h2>{{$value->name}}</h2>
                                 <p>{{$value->username}}</p>
                             </a>
                         @empty
                             <li class="list-group-item">まだボットは登録されていません</li>
                         @endforelse
-                        <a href="{{route('server.create')}}" class="btn btn-success" style="margin-top:15px;">ボットを追加する</a>
+                        <a href="{{route('bot.create')}}" class="btn btn-success" style="margin-top:15px;">ボットを追加する</a>
                     </ul>
                 </div>
             </div>

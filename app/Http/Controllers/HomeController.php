@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Server;
+use App\Bot;
 use RestCord\DiscordClient;
 
 class HomeController extends Controller
@@ -25,9 +25,9 @@ class HomeController extends Controller
     */
     public function index()
     {
-        $server = Server::all();
+        $server = Bot::all();
+        $guild_list = [];
         if ($server->isNotEmpty()) {
-            $guild_list = [];
             foreach ($server as $value) {
                 $client = new DiscordClient(['token' => $value->token]);
                 $guild = $client->guild->getGuild(['guild.id' => $value->guild_id]);

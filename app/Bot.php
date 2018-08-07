@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bot extends Model
 {
-    //
+    protected $fillable = [
+        'token', 'guild_id'
+    ];
 }

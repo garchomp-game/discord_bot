@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Server;
 
 class BotController extends Controller
 {
@@ -23,7 +24,7 @@ class BotController extends Controller
      */
     public function create()
     {
-        //
+        return view('server.create');
     }
 
     /**
@@ -34,7 +35,7 @@ class BotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Server::create($request->all());
     }
 
     /**
