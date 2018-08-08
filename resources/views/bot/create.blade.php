@@ -4,7 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="panel panel-default">
-                {{Form::open(['route' => 'server.store', 'class' => 'form-group', 'style' => 'width:70%; margin:30px auto;'])}}
+                {{Form::open(['route' => 'bot.store', 'class' => 'form-group', 'style' => 'width:70%; margin:30px auto;'])}}
+                <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                 <h2>ボット新規作成</h2>
                 <a href="https://discordapp.com/developers/applications/" class="text-center form-control btn-success" target="_blank">ぼっと作成画面はこちら（公式サイトに飛びます）</a>
                 <p>ボットのトークン(BotからCopyボタンでクリップボードにコピー可能)</p>

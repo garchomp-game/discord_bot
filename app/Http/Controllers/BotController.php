@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Server;
+use App\Message;
+use App\Bot;
 
 class BotController extends Controller
 {
@@ -17,6 +18,13 @@ class BotController extends Controller
         //
     }
 
+    public function on(Request $request)
+    {
+        $bot = Bot::find($request->bot_id);
+        $message = Message::where('bot_id', $request->bot_id)->get();
+        event(new BotRunEvent($bot, $message));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +32,7 @@ class BotController extends Controller
      */
     public function create()
     {
-        return view('server.create');
+        return view('bot.create');
     }
 
     /**
@@ -35,7 +43,9 @@ class BotController extends Controller
      */
     public function store(Request $request)
     {
-        Server::create($request->all());
+        Bot::create($request->all());
+        return redirect()->route('root_path');
+
     }
 
     /**
@@ -44,9 +54,14 @@ class BotController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Bot $bot)
     {
-        //
+        if ($bot->user_id != auth()->user()->id) {
+            return redirect()->route('root_path');
+        }
+        $guild = Bot::guild($bot);
+        $messages = Message::where('bot_id', $bot->id)->get();
+        return view('bot.show', compact('guild', 'messages'));
     }
 
     /**

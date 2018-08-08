@@ -17,5 +17,10 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('root_path');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('bot/on', 'BotController@on')->name('bot.on');
+
 Route::resource('bot', 'BotController');
-Route::resource('message', 'MessageController');
+Route::prefix('{bot}')->group(function() {
+    Route::resource('message', 'MessageController');
+});

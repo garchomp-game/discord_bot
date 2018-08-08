@@ -21,7 +21,7 @@ controller
         update
         destroy
     auth/(make:auth)
-    
+
     bot
         index
             いわゆるこれがトップ画面になる。
@@ -31,3 +31,54 @@ controller
         store
         update
         destroy
+
+
+bot詳細（メッセージ登録：一覧）案
+    メッセージの内容
+    タイミング（ラジオボタン）
+        投稿のタイミング
+            タイミング指定だったら
+                反応対象文字列
+            時間指定だったら
+                どのタイミングで投稿するか
+
+
+message
+    text comment
+    integer check_type
+    string message nullable
+    datetime time nullable
+
+
+
+
+bot->id <=> message->bot_id
+    message: gelongsTo
+    {
+        comment:必ず必要な要素
+        check_type: 次の要素を確認するためのフラグ
+        if(check_type == message) {
+            監視する
+            メッセージが来たタイミングでアクションをする
+        } elseif(check_type == time) {
+            監視する
+            一定の時間になったら発火
+        }
+    }
+
+監視の部分はどうやって解決するか。
+=>discordのapiからgetまたはpostでリクエスト渡ってこないか？
+
+試してみよう！
+テストページに、単にメッセージを表示するだけのプログラム作成
+
+
+
+
+
+
+
+
+
+
+__end

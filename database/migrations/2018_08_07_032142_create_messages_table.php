@@ -15,10 +15,13 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('channnel_id')->nullable();
+            $table->integer('bot_id')->nullable();
             $table->text('comment');
-            $table->integer('reply_flg');
-            $table->datetime('set_data')->nullable();
+            // 分岐用
+            $table->string('check_type');
+            // 分岐内容によってどっちかにメッセはいる
+            $table->text('message')->nullable();
+            $table->datetime('time')->nullable();
             $table->timestamps();
         });
     }
