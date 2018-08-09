@@ -18,7 +18,7 @@
                             @forelse ($guilds as $value)
                                 <a class="list-group-item" href="{{route('bot.show', $value->bot_table_id)}}">
                                     <h2>{{$value->name}}</h2>
-                                    <p>{{$value->username}}</p>
+                                    <h2>{{$value->username}}</h2>
                                 </a>
                             @empty
                                 <li class="list-group-item">まだボットは登録されていません</li>
