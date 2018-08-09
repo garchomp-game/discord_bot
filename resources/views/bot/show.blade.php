@@ -23,8 +23,8 @@
                             <div class="col-md-2 text-right">
                                 <a href="javascript:bot_run.submit()"
                                 class="btn btn-warning"
-                                style="margin-bottom:15px;">編集</a><br>
-                                {{Form::open(['route' => ['message.on', $value->bot_id]])}}
+                                style="margin-bottom:15px;">稼働</a><br>
+                                {{Form::open(['route' => ['bot.on', $value->bot_id], 'name' => 'bot_run'])}}
                                 {{Form::close()}}
                                 <a href="javascript:destroy.submit()"
                                 class="btn btn-danger">削除</a>

@@ -5,6 +5,8 @@ namespace App\Listeners;
 use App\Events\BotRunEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use RestCord\DiscordClient;
+
 
 class BotRunEventListener
 {
@@ -26,19 +28,9 @@ class BotRunEventListener
     */
     public function handle(BotRunEvent $event)
     {
-        $discord = new \Discord\Discord([
-            'token' => $event->bot->token,
+        $discord = new DiscordClient(['token' => $event->bot->token]); // Token is required
+        $discord->{'audit-log'}->getGuildAuditLog([
+            'guild.id' => $event->bot->guild_id
         ]);
-
-        $discord->on('ready', function ($discord) use($event){
-            $discord->on('message', function ($message) use($event){
-                foreach ($event->message as $value) {
-                    if ($value->message == $message->content) {
-                        $message->reply($value->comment);
-                    }
-                }
-            });
-        });
-        $discord->run();
     }
 }

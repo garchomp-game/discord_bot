@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Message;
 use App\Bot;
+use App\Events\BotRunEvent;
+use App\Jobs\BotRunQueue;
 
 class BotController extends Controller
 {
@@ -18,11 +20,11 @@ class BotController extends Controller
         //
     }
 
-    public function on(Request $request)
+    public function on(Request $request, Bot $bot)
     {
-        $bot = Bot::find($request->bot_id);
-        $message = Message::where('bot_id', $request->bot_id)->get();
-        event(new BotRunEvent($bot, $message));
+        $message = Message::where('bot_id', $bot->id)->get();
+        BotRunQueue::dispatch($bot, $message);
+        return redirect()->route('root_path');
     }
 
     /**
@@ -34,7 +36,7 @@ class BotController extends Controller
     {
         return view('bot.create');
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
